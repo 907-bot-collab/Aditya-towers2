@@ -1,6 +1,6 @@
 import type {
   Flat, Transaction, Event, Notice, Complaint, Post, Poll,
-  DashboardStats, Occupancy
+  DashboardStats
 } from './types';
 
 // ============================================================

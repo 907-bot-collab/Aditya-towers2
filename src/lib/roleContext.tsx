@@ -25,8 +25,17 @@ export function RoleProvider({ children }: { children: ReactNode }) {
   const [role, setRoleState] = useState<Role>('resident');
 
   useEffect(() => {
-    const stored = localStorage.getItem('ft_role') as Role | null;
-    if (stored && ROLE_USERS[stored]) setRoleState(stored);
+    let active = true;
+    const load = () => {
+      const stored = localStorage.getItem('ft_role') as Role | null;
+      if (stored && ROLE_USERS[stored] && active) {
+        setRoleState(stored);
+      }
+    };
+    load();
+    return () => {
+      active = false;
+    };
   }, []);
 
   const setRole = (r: Role) => {
